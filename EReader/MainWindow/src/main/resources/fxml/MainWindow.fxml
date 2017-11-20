@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EReader.MainWindow.WindowController">
+  <children>
+      <MenuBar prefHeight="25.0" prefWidth="600.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open File" />
+                  <Menu fx:id="bookmarkSubmenu" mnemonicParsing="false" text="Open Bookmarked" />
+                  <MenuItem mnemonicParsing="false" onAction="#openDirectory" text="Open Directory" />
+                  <MenuItem mnemonicParsing="false" onAction="#exportToText" text="Export to Text" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#bookmark" text="Bookmark" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeBookmark" text="Remove Bookmark" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#properties" text="Properties" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#nextPage" text="Next Page" />
+                  <MenuItem mnemonicParsing="false" onAction="#previousPage" text="Previous Page" />
+                  <MenuItem mnemonicParsing="false" text="Display Full Page" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
+        <items>
+            <Button mnemonicParsing="false" onAction="#previousPage" text="Previous Page">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="changePage" onAction="#pageSelected" prefHeight="25.0" prefWidth="43.0" />
+            <Label fx:id="maxPageLabel" text="Label" />
+            <Button mnemonicParsing="false" onAction="#bookmark" text="Bookmark" />
+          <Button mnemonicParsing="false" onAction="#nextPage" text="Next Page">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+        </items>
+      </ToolBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextArea fx:id="mainTextArea" editable="false" prefHeight="375.0" prefWidth="640.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="80.0" right="80.0" />
+               </padding>
+            </TextArea>
+         </children>
+    </AnchorPane>
+      <HBox opacity="0.4" prefHeight="0.0" prefWidth="640.0">
+         <children>
+            <Label fx:id="loadedLabel" />
+         </children>
+      </HBox>
+  </children>
+</VBox>

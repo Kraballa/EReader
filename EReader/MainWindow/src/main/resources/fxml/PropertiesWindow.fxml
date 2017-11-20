@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EReader.MainWindow.WindowController">
+  <tabs>
+    <Tab text="General">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+    </Tab>
+    <Tab text="Appearance">
+         <content>
+            <VBox>
+               <children>
+                  <CheckBox mnemonicParsing="false" text="Dark Mode" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+    </Tab>
+      <Tab text="Highlights" />
+      <Tab text="Text Correction">
+        <content>
+            <VBox>
+               <children>
+                  <CheckBox fx:id="tabFix" mnemonicParsing="false" selected="true" text="Tabs to Spaces">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></CheckBox>
+                  <CheckBox fx:id="paragraphFix" mnemonicParsing="false" selected="true" text="Autorecognize Paragraphs">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="splitWordFix" mnemonicParsing="false" selected="true" text="Join splitted Words">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" text="Remove Header">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <TextField />
+                     </graphic>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" text="Remove Footer">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <TextField />
+                     </graphic>
+                  </CheckBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bookmarker/Bookmarker.iml" filepath="$PROJECT_DIR$/Bookmarker/Bookmarker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EReader.iml" filepath="$PROJECT_DIR$/EReader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MainWindow/MainWindow.iml" filepath="$PROJECT_DIR$/MainWindow/MainWindow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TextFormatter/TextFormatter.iml" filepath="$PROJECT_DIR$/TextFormatter/TextFormatter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Textractor/Textractor.iml" filepath="$PROJECT_DIR$/Textractor/Textractor.iml" />
+    </modules>
+  </component>
+</project>
