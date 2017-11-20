@@ -1,6 +1,5 @@
 package EReader.Bookmarker;
 
-import javax.swing.table.DefaultTableModel;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,14 +11,6 @@ public class BookmarkManager {
 
     private static final String PATH = "Bookmarker/target/";
 
-
-    /**
-     * Creates a new BookmarkManager.
-     */
-    public BookmarkManager(){
-
-    }
-
     /**
      * Writes a specific set of data to a specific file. The format is .csv which can be opened as a regular Text file,
      * or for more comfort in an Excel-like program.
@@ -27,20 +18,16 @@ public class BookmarkManager {
      * @param filename
      */
     public static void writeToDisk(Object[][] aData, String filename) {
-
         System.out.println(PATH+filename);
         try {
-
             File file = new File(PATH + filename);
             System.out.println(PATH+filename);
             file.delete();
 
             System.out.println(file.getAbsolutePath());
-
-
             FileOutputStream fout = new FileOutputStream(file, false);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout));
-            //Headers
+
             bw.append("Files, Page");
             bw.append('\n');
 
@@ -55,14 +42,10 @@ public class BookmarkManager {
                         bw.append(aData[row][column].toString());
                         bw.append(',');
                     }
-
                 }
-
                 bw.append('\n');
             }
-
             System.out.println(fout.toString());
-
             bw.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,20 +63,16 @@ public class BookmarkManager {
             try {
                 FileInputStream fin = new FileInputStream(file);
                 BufferedReader br = new BufferedReader(new InputStreamReader(fin));
-
                 String current = br.readLine();
                 //to skip the first line that states the column names. They still appear when opening the file with excel.
                 current = br.readLine();
-
                 while (current != null) {
                     String[] splitInput = current.split(",");
                     bookmark.addBookmark(new File(splitInput[0]), Integer.parseInt(splitInput[1]));
                     current = br.readLine();
                 }
-
                 fin.close();
                 br.close();
-
                 return bookmark;
 
             } catch (Exception e) {
@@ -105,9 +84,9 @@ public class BookmarkManager {
 
     /**
      * Loads the file and stores it in an ArrayList<File>.
-     * @return
+     * @return  ArrayList of all recent Files.
      */
-    public ArrayList<File> getRecentFiles(){
+    public static ArrayList<File> getRecentFiles(){
         File file = new File("PDFReader.Bookmarker/target/BookmarkExport.csv");
         ArrayList<File> files = new ArrayList<>();
         if (file.exists()) {

@@ -14,11 +14,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="Bookmarker" target="1.5" />
-      <module name="EReader" target="1.5" />
-      <module name="MainWindow" target="1.5" />
+      <module name="Bookmarker" target="1.8" />
+      <module name="EReader" target="1.8" />
+      <module name="MainWindow" target="1.8" />
       <module name="TextFormatter" target="1.8" />
-      <module name="Textractor" target="1.5" />
+      <module name="Textractor" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

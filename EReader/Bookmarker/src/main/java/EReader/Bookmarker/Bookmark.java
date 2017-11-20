@@ -16,6 +16,12 @@ public class Bookmark {
         dataMap = hashMap;
     }
 
+    /**
+     * Adds a Bookmark. A Bookmark represents a function where one file corresponds to an integer representing the page
+     * that is stored right now.
+     * @param file  file to bookmark.
+     * @param page  page to bookmark.
+     */
     public void addBookmark(File file, int page) {
         if(dataMap.containsKey(file)){
             dataMap.remove(file);
@@ -23,6 +29,10 @@ public class Bookmark {
         dataMap.put(file, page);
     }
 
+    /**
+     * Removes a Bookmark.
+     * @param file  the file to remove the bookmark for.
+     */
     public void removeBookmark(File file) {
         if(dataMap.containsKey(file)){
             dataMap.remove(file);
@@ -47,12 +57,14 @@ public class Bookmark {
 
     public ArrayList<File> getFiles(){
         ArrayList<File> files = new ArrayList<>();
-        for(File current: dataMap.keySet()){
-            files.add(current);
-        }
+        files.addAll(dataMap.keySet());
         return files;
     }
 
+    /**
+     * Converts the data of all stored bookmarks toa 2d array of Objects.
+     * @return  2d array of Objects
+     */
     public Object[][] getBookmarkData() {
 
         int rowCount = dataMap.size();

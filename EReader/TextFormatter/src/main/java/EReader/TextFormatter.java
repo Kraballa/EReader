@@ -55,9 +55,9 @@ public class TextFormatter {
 
     /**
      * Removes a specified number of lines from the start of the Scanner.
-     * @param scanner
-     * @param head
-     * @return
+     * @param scanner   Scanner to edit
+     * @param head      number of lines to ignore
+     * @return          Scanner without specified header
      */
     public static Scanner removeHeader(Scanner scanner, Integer head){
         String txt = "";
@@ -77,9 +77,9 @@ public class TextFormatter {
 
     /**
      * Removes a specified number of lines from the end of the Scanner.
-     * @param scanner
-     * @param foot
-     * @return
+     * @param scanner   Scanner to edit
+     * @param foot      number of lines to ignore from the end
+     * @return          edited Scanner
      */
     public static Scanner removeFooter(Scanner scanner, Integer foot){
         String txt = "";

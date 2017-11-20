@@ -4,6 +4,7 @@ import EReader.Bookmarker.Bookmark;
 import EReader.Bookmarker.BookmarkManager;
 import EReader.TextFormatter;
 import EReader.Textractor.AbstractParallelReader;
+import EReader.Textractor.PDFParallelReader;
 import EReader.Textractor.PDFReader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -75,7 +76,7 @@ public class WindowController {
 
         if(file != null && file.exists()){
             loadedLabel.setText("loading...");
-            reader = new PDFReader();
+            reader = new PDFParallelReader();
             reader.loadFile(file);
 
             bookmark = BookmarkManager.importTable();
@@ -193,7 +194,6 @@ public class WindowController {
     }
 
     private Scanner applyTextFormatFixes(Scanner scanner){
-        //return TextFormatter.formatMultiple(scanner,splitWordFix.isSelected(),paragraphFix.isSelected(),tabFix.isSelected());
         return TextFormatter.formatAll(scanner);
     }
 

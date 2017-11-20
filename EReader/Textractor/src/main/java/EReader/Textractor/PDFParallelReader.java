@@ -5,7 +5,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.IOException;
 
-public class PDFReader extends AbstractReader{
+public class PDFParallelReader extends AbstractParallelReader{
 
     @Override
     public String loadPage(Integer page) {

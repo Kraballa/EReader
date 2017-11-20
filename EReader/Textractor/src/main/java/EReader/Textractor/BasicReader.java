@@ -9,7 +9,7 @@ public interface BasicReader {
      * Extracts the contents of a file into an array of scanners.
      * @param file
      */
-    public void loadFile(File file);
+    void loadFile(File file);
 
     /**
      * After having loaded the pages with <code>loadFile()</code> you can get single Scanners that contain
