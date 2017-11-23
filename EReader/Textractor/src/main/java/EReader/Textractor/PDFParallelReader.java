@@ -5,39 +5,38 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.IOException;
 
-public class PDFParallelReader extends AbstractParallelReader{
+public class PDFParallelReader extends AbstractParallelReader {
 
     @Override
-    public String loadPage(Integer page) {
-        try{
+    public String loadPage(Integer page) throws IOException {
+        try {
             PDDocument doc = PDDocument.load(getFile());
             String txt;
-            if(!doc.isEncrypted()){
+            if (!doc.isEncrypted()) {
                 PDFTextStripper stripper = new PDFTextStripper();
                 stripper.setStartPage(page);
                 stripper.setEndPage(page);
                 txt = stripper.getText(doc);
-            }else{
+            } else {
                 txt = "PDF file is encrypted";
             }
             doc.close();
             return txt;
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return "Error reading page " + page;
         }
     }
 
     @Override
-    public int getPages() {
-        try{
-            PDDocument doc = PDDocument.load(getFile());
-            int pages = doc.getNumberOfPages();
-            doc.close();
-            return pages;
-        }catch(IOException e){
-            return 0;
+    public int getPages() throws IOException {
+        PDDocument doc = PDDocument.load(getFile());
+        int pages = doc.getNumberOfPages();
+        if (pages == 0) {
+            throw new IOException("Error, invalid PDF file");
         }
+        doc.close();
+        return pages;
     }
 
     @Override

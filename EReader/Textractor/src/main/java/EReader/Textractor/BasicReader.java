@@ -1,15 +1,17 @@
 package EReader.Textractor;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public interface BasicReader {
 
     /**
-     * Extracts the contents of a file into an array of scanners.
-     * @param file
+     * Loads an entire File. This incorporates opening the document, extracting the text and storing the data in a
+     * String[] for every page.
+     * @param file  the file to load
      */
-    void loadFile(File file);
+    void loadFile(File file) throws IOException;
 
     /**
      * After having loaded the pages with <code>loadFile()</code> you can get single Scanners that contain
@@ -18,13 +20,13 @@ public interface BasicReader {
      * @param page  the page you want to display.
      * @return      a Scanner that contains the text of a page
      */
-    public Scanner readPage(Integer page);
+    public Scanner readPage(Integer page) throws IOException;
 
     /**
-     * Returns the amount of Pages starting from 1.
+     * Returns the number of Pages.
      * @return  number of pages
      */
-    public int getPages();
+    public int getPages() throws IOException;
 
     /**
      * Loads a page from the specified file. In contrast to <code>readPage()</code> this accesses the file itself.
@@ -32,7 +34,7 @@ public interface BasicReader {
      * @param page
      * @return
      */
-    public String loadPage(Integer page);
+    public String loadPage(Integer page) throws IOException;
 
     /**
      * Returns the extension the Reader handles.

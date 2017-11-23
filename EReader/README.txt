@@ -1,7 +1,7 @@
-This is version 1.1 of this File
+This is version 1.1.1 of this File
 
-Current Version 1.0
-Last Version -
+Current Version 1.0.1
+Last Version 1.0
 
 
 Table of Content:
@@ -48,18 +48,18 @@ show a completed page like your default Pdf Reader. I do not plan on expanding t
 Also text may be parsed out of order for the reasons mentioned above.
 
 Now what does it to WELL and better than the Chrome Pdf-Reader I was using before?
-a) show text in a manner that is easy on the eye and space-efficient (depending on the text structure of the source file)
-b) allow you to bookmark your progress with a loading feature
-c) lets you export the full pdf-file to txt
+a) show text in a manner that is easy on the eye and space-efficient
+b) allow you to bookmark your progress with a convenient loading feature
+c) (WIP) lets you export the full pdf-file to txt
 
 All in all I'm very happy how the project turned out as it works very well for my intended purposes.
 
 2. Version 2.x
-I rewrote the entire thing because I had issues both with swing and my design was atrocious. Right now I'm using
+I rewrote the entire thing because I had issues with swing and my design was atrocious. Right now I'm using
 javafx which is much cleaner in my opinion (looking at my main class is fun again!). Also I outsourced the text
 correction into a module as it should have been from the start. The Reader Interface makes a lot more sense and
 the AbstractReader handles all the data storing stuff. As of 20. november 2017 I implemented a parallel version of
-the AbstractReader. While it didn't improve the speed of the loading process by a ton it's still nice to have.
+the AbstractReader. It improved the speed of loading a file by a ton, especially for smaller (<200 pages) files.
 The best thing about it is that you don't have to do anything special when implementing more Reader classes!
 Right now the entire document is loaded straight away which can take anywhere between almost 0 to 10 seconds with
 moderately sized files. You can run the PDFSpeedTest which loads the java language specification (670 pages full of text)
@@ -67,7 +67,8 @@ moderately sized files. You can run the PDFSpeedTest which loads the java langua
 87 and 69 seconds. This number seems worrying but this really was the worst case possible.
 
 3. Future plans:
--Implement the ServiceLoaderAPI for easier extension management.
+-implement a way to handle opening different File types
+(-Implement the ServiceLoaderAPI for easier extension management)
 -Make the Properties window functional
 -
 

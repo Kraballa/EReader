@@ -17,8 +17,8 @@ public class Bookmark {
     }
 
     /**
-     * Adds a Bookmark. A Bookmark represents a function where one file corresponds to an integer representing the page
-     * that is stored right now.
+     * Adds a Bookmark. A Bookmark represents a function where one file corresponds to an integer. It's designed to
+     * be used in a reader-like environment where you want to save a page to come back to later like a book.
      * @param file  file to bookmark.
      * @param page  page to bookmark.
      */
@@ -62,7 +62,8 @@ public class Bookmark {
     }
 
     /**
-     * Converts the data of all stored bookmarks toa 2d array of Objects.
+     * Converts the data of all stored bookmarks to a 2d array of Objects. An Object can be stored much easier than
+     * a complex structure like a bookmark. Use the BookmarkManager class to do that.
      * @return  2d array of Objects
      */
     public Object[][] getBookmarkData() {
@@ -75,7 +76,7 @@ public class Bookmark {
         int index = 0;
         for(File current: dataMap.keySet()){
             curTableData[index][0] = current;
-            curTableData[index][1] = dataMap.get(current);
+            curTableData[index][1] = getBookmarkedPage(current);
             index++;
         }
         return curTableData;

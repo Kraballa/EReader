@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * This class provides useful methods when working with Bookmarks and JTables. It let's you save bookmarks from
- * a TableModel to a file and load them later to a Bookmark, which again can be parsed to a TableModel.
+ * This class provides useful methods when working with Bookmarks. It lets you save bookmarks to a file and load them
+ * later.
  */
 public class BookmarkManager {
 
@@ -14,14 +14,13 @@ public class BookmarkManager {
     /**
      * Writes a specific set of data to a specific file. The format is .csv which can be opened as a regular Text file,
      * or for more comfort in an Excel-like program.
-     * @param aData the Data to save. This either used to be a TableModel or a Bookmark
-     * @param filename
+     * @param aData the Data to save.
+     * @param filename  the filename of the target file.
      */
     public static void writeToDisk(Object[][] aData, String filename) {
         System.out.println(PATH+filename);
         try {
             File file = new File(PATH + filename);
-            System.out.println(PATH+filename);
             file.delete();
 
             System.out.println(file.getAbsolutePath());
@@ -35,7 +34,6 @@ public class BookmarkManager {
                 for (int column = 0; column < aData[row].length; column++) {
                     if (aData[row][column] == null) {
                         bw.append("null");
-                        // The comma separated value
                         bw.append(',');
                     } else {
 
@@ -45,7 +43,6 @@ public class BookmarkManager {
                 }
                 bw.append('\n');
             }
-            System.out.println(fout.toString());
             bw.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,11 +50,11 @@ public class BookmarkManager {
     }
 
     /**
-     * Imports the BookmarkExport.csv file and loads it into a Bookmark instance.
+     * Imports an exported .csv file and loads it into a Bookmark instance.
      * @return  an instance of Bookmark.
      */
-    public static Bookmark importTable() {
-        File file = new File(PATH + "BookmarkExport.csv");
+    public static Bookmark importBookmark(String filename) {
+        File file = new File(PATH + filename);
         if (file.exists()) {
             Bookmark bookmark = new Bookmark();
             try {
@@ -84,17 +81,19 @@ public class BookmarkManager {
 
     /**
      * Loads the file and stores it in an ArrayList<File>.
+     * @param filename  name of the .csv file.
      * @return  ArrayList of all recent Files.
      */
-    public static ArrayList<File> getRecentFiles(){
-        File file = new File("PDFReader.Bookmarker/target/BookmarkExport.csv");
+    public static ArrayList<File> getRecentFiles(String filename) {
+        File file = new File(PATH + filename);
         ArrayList<File> files = new ArrayList<>();
         if (file.exists()) {
             try {
                 FileInputStream fin = new FileInputStream(file);
                 BufferedReader br = new BufferedReader(new InputStreamReader(fin));
-
                 String current = br.readLine();
+                //again, to skip the first line
+                current = br.readLine();
 
                 while (current != null) {
                     String[] splitInput = current.split(",");

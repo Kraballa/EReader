@@ -1,8 +1,14 @@
 package EReader.Textractor;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * @deprecated use AbstractParallelReader instead. it does the same but optimized for multithreading. I won't update
+ * this class anymore since there's no point. The other one is objectively better.
+ */
+@Deprecated
 public abstract class AbstractReader implements BasicReader{
     private String[] content;
     private File file;
@@ -12,7 +18,7 @@ public abstract class AbstractReader implements BasicReader{
      * Scanner[] for every page.
      * @param file  the file to load
      */
-    public void loadFile(File file){
+    public void loadFile(File file) throws IOException {
         this.file = file;
         content = new String[getPages()];
 
@@ -28,7 +34,7 @@ public abstract class AbstractReader implements BasicReader{
      * @param page  the page you want to display.
      * @return      the Scanner containing the data.
      */
-    public Scanner readPage(Integer page) {
+    public Scanner readPage(Integer page) throws IOException {
         if (content != null){
             if(content[page-1] != null) {
                 return new Scanner(content[page - 1]);
@@ -51,7 +57,7 @@ public abstract class AbstractReader implements BasicReader{
      * @param page
      * @return
      */
-    public String loadPage(Integer page){
+    public String loadPage(Integer page) throws IOException {
         throw new UnsupportedOperationException("Error, unimplemented method");
     }
 
@@ -59,7 +65,7 @@ public abstract class AbstractReader implements BasicReader{
      * Returns the number of pages in a file.
      * @return
      */
-    public int getPages() {
+    public int getPages() throws IOException {
         throw new UnsupportedOperationException("Error, unimplemented method");
     }
 

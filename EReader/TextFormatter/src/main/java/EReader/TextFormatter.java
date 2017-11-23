@@ -2,6 +2,10 @@ package EReader;
 
 import java.util.Scanner;
 
+/**
+ * When dealing with extracted text many weird things can happen. This is a text correction class that should
+ * fix the biggest mistakes.
+ */
 public class TextFormatter {
 
     /**
@@ -41,9 +45,9 @@ public class TextFormatter {
 
     /**
      * When formatting the paragraphs it can happen that words that were originally typed split (i.e. "gi- [NEWLINE]
-     * raffe") appear in the same line (i.e. "gi- raffe"). This option tries to fix this by recognising when two words
-     * match a certain pattern that most likely will only occurr in those situations. Because it's impossible to
-     * distinguish cases where it's supposed to be like this, this stays an option.
+     * raffe") appear in the same line (i.e. "gi- raffe"). This method recognizes both cases in a broader pattern
+     * and removes them. Because I can't distinguish between cases where it should be formatted like this,
+     * use with caution!
      * @param scanner   the Scanner containing the String that needs to be formatted.
      * @return          new Scanner containing the formatted String.
      */

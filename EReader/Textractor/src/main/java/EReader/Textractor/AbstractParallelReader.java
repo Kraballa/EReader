@@ -1,8 +1,13 @@
 package EReader.Textractor;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Implements most methods from the BasicReader Interface. If you want to expand this program with more FileReader,
+ * extend from this class and implement loadPage() and getfPages().
+ */
 public abstract class AbstractParallelReader implements BasicReader{
     private String[] content;
     private File file;
@@ -12,18 +17,18 @@ public abstract class AbstractParallelReader implements BasicReader{
         setNumOfProcessors(Runtime.getRuntime().availableProcessors());
     }
 
-    /**
-     * Loads an entire File. This incorporates opening the document, extracting the text and storing the data in a
-     * Scanner[] for every page.
-     * @param file  the file to load
-     */
-    public void loadFile(File file){
+    @Override
+    public void loadFile(File file) throws IOException {
         this.file = file;
+        int pages = getPages();
+        if (pages <= 0) {
+            throw new IOException("Error, unable to fetch file head.");
+        }
         content = new String[getPages()];
         PageLoader[] threads = new PageLoader[numOfProcessors];
 
         for(int i = 0; i < numOfProcessors; i++){
-            int pagesInThread = getPages()/numOfProcessors;
+            int pagesInThread = pages / numOfProcessors;
             if(i == 0){
                 pagesInThread += pagesInThread %numOfProcessors;
             }
@@ -43,13 +48,8 @@ public abstract class AbstractParallelReader implements BasicReader{
         }
     }
 
-    /**
-     * Returns a Scanner that contains the text of a single page. This works indepentently of the data type since
-     * it accesses the Scanner[] that stores all the data.
-     * @param page  the page you want to display.
-     * @return      the Scanner containing the data.
-     */
-    public Scanner readPage(Integer page) {
+    @Override
+    public Scanner readPage(Integer page) throws IOException {
         if (content != null){
             if(content[page-1] != null) {
                 return new Scanner(content[page - 1]);
@@ -58,30 +58,12 @@ public abstract class AbstractParallelReader implements BasicReader{
                     content[page-1] = loadPage(page);
                     return readPage(page);
                 }else{
-                    throw new IllegalStateException("Error, no File has been loaded yet.");
+                    throw new IOException("Error, no File has been loaded yet.");
                 }
             }
         }else{
-            throw new IllegalStateException("Error, no File has been loaded yet.");
+            throw new IOException("Error, no File has been loaded yet.");
         }
-    }
-
-    /**
-     * This opens, reads the text from, and closes one page of a document. Since this method is different for each
-     * subclass, you have to implement it to have a functional program.
-     * @param page
-     * @return
-     */
-    public String loadPage(Integer page){
-        throw new UnsupportedOperationException("Error, unimplemented method");
-    }
-
-    /**
-     * Returns the number of pages in a file.
-     * @return
-     */
-    public int getPages() {
-        throw new UnsupportedOperationException("Error, unimplemented method");
     }
 
     public File getFile() {
@@ -146,7 +128,12 @@ public abstract class AbstractParallelReader implements BasicReader{
         @Override
         public void run(){
             for(int i = 0; i < pagesInThread; i++){
-                text[i] = loadPage(i+page);
+                try {
+                    text[i] = loadPage(i + page);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    text[i] = "Error loading page.";
+                }
             }
         }
     }

@@ -2,15 +2,17 @@ package EReader.Textractor;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 public class PDFSpeedTest {
 
     private PDFReader reader;
     private PDFParallelReader parallelReader;
-    private final String PATH = "src/test/resources/long-pdf-sample.pdf";
+    private final String PATH = "src/test/resources/encrypted-pdf-sample.pdf";
     private File longpdffile;
 
     @Before
@@ -32,12 +34,17 @@ public class PDFSpeedTest {
         double sequenceavg;
         double acceleration;
         double efficiency;
-        int pages = 670;
+        int pages = 4;
         int cores = Runtime.getRuntime().availableProcessors();
 
         long startTime = System.currentTimeMillis();
-        for(int i = 0; i < 1; i++){
-            reader.loadFile(longpdffile);
+        for (int i = 0; i < 5; i++) {
+            try {
+                reader.loadFile(longpdffile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
             System.out.println((i+1)+": Sequencially loaded "+(pages+i*pages)+" pages in "+(System.currentTimeMillis() - startTime)+" ms.");
         }
         long endTime = System.currentTimeMillis();
@@ -45,8 +52,13 @@ public class PDFSpeedTest {
         System.out.println("Avg: " + sequenceavg + " cores: 1");
 
         startTime = System.currentTimeMillis();
-        for(int i = 0; i < 1; i++){
-            parallelReader.loadFile(longpdffile);
+        for (int i = 0; i < 5; i++) {
+            try {
+                parallelReader.loadFile(longpdffile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
             System.out.println((i+1)+": parallel loaded "+(pages +i*pages)+" pages in "+(System.currentTimeMillis() - startTime)+" ms.");
         }
         endTime = System.currentTimeMillis();

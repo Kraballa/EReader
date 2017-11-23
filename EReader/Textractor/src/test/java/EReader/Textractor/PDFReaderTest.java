@@ -3,6 +3,7 @@ package EReader.Textractor;
 import org.junit.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PDFReaderTest {
@@ -29,10 +30,14 @@ public class PDFReaderTest {
 
     @Test
     public void getPagesTest(){
-        reader.loadFile(pdffile);
-        assert(reader.getPages() == 1);
-        reader.loadFile(encryptedpdffile);
-        assert(reader.getPages() == 4);
+        try {
+            reader.loadFile(pdffile);
+            assert (reader.getPages() == 1);
+            reader.loadFile(encryptedpdffile);
+            assert (reader.getPages() == 4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -42,23 +47,36 @@ public class PDFReaderTest {
 
     @Test
     public void loadPageTest(){
-        reader.loadFile(pdffile);
-        Scanner scanner = reader.readPage(1);
-        while(scanner.hasNextLine()) {
-            System.out.println(scanner.nextLine());
+        try {
+            reader.loadFile(pdffile);
+            Scanner scanner = reader.readPage(1);
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     @Test
     public void loadEncryptedPageTest(){
-        reader.loadFile(encryptedpdffile);
-        Scanner scanner = reader.readPage(1);
-        assert(scanner.nextLine().equals("PDF file is encrypted"));
+        try {
+            reader.loadFile(encryptedpdffile);
+            Scanner scanner = reader.readPage(1);
+            assert (scanner.nextLine().equals("PDF file is encrypted"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void loadEmptyPageTest(){
-        reader.loadFile(pdffile);
-        Scanner scanner = reader.readPage(2);
+        try {
+            reader.loadFile(pdffile);
+            Scanner scanner = reader.readPage(2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
